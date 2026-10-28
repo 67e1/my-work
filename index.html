@@ -94,6 +94,11 @@
             background: linear-gradient(135deg, var(--primary), #6366f1);
             margin-bottom: 1.5rem;
             box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: var(--bg-card);
         }
 
         .profile-img {
@@ -103,6 +108,20 @@
             object-fit: cover;
             border: 3px solid var(--bg-dark);
             background-color: var(--bg-card);
+        }
+
+        .profile-fallback {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 3px solid var(--bg-dark);
         }
 
         .hero h1 {
@@ -214,7 +233,7 @@
             color: var(--primary);
         }
 
-        /* قسم المشاريع (البطاقة بالكامل قابلة للضغط) */
+        /* قسم المشاريع */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -295,6 +314,7 @@
             padding: 3px 10px;
             border-radius: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 2;
         }
 
         /* قسم تواصل معي */
@@ -374,7 +394,7 @@
             transform: scale(1.1);
         }
 
-        /* قسم التقييمات - مرتب ومضبوط للابتوب والموبايل */
+        /* قسم التقييمات */
         .reviews-wrapper {
             max-width: 1050px;
             margin: 0 auto;
@@ -482,10 +502,9 @@
             background-color: var(--bg-dark);
         }
 
-        /* التجاوب مع شاشات الموبايل والتابلت */
         @media (max-width: 850px) {
             header { padding: 1rem 5%; }
-            nav { display: none; } /* يمكن تبسيط القائمة للموبايل أو إبقاؤها حسب الرغبة */
+            nav { display: none; }
             .hero h1 { font-size: 2.1rem; }
             section { padding: 4rem 5%; }
             .reviews-wrapper {
@@ -511,7 +530,9 @@
     <!-- الواجهة الرئيسية -->
     <section id="home" class="hero">
         <div class="profile-img-container">
-            <img src="g:\a3male\eebc6457-f3ed-4227-8f1d-7de09450d007.png" alt="صورتي الشخصية" class="profile-img">
+            <!-- ربط اسم الصورة المباشر مع بديل احتياطي في حال الخطأ -->
+            <img src="eebc6457-f3ed-4227-8f1d-7de09450d007.png" alt="صورتي الشخصية" class="profile-img" onerror="this.style.display='none'; document.getElementById('fallbackLetter').style.display='flex';">
+            <div id="fallbackLetter" class="profile-fallback" style="display:none;">أ</div>
         </div>
         <h1>مرحباً، أنا <span>أمير</span></h1>
         <p>مطور ومصمم واجهات ويب متخصص في تحويل الأفكار إلى مواقع وتطبيقات رقمية احترافية، سريعة، ومتجاوبة تماماً مع جميع الأجهزة.</p>
@@ -537,13 +558,12 @@
         </div>
     </section>
 
-    <!-- قسم الأعمال والمشاريع (المربع بالكامل قابل للضغط) -->
+    <!-- قسم المشاريع -->
     <section id="projects">
         <h2 class="section-title">مختارات من أبرز أعمالي</h2>
         <div class="projects-grid">
             
-            <!-- المشروع الأول: معرض أعمال المونتير -->
-            <a href="https://quiet-cannoli-07ba99.netlify.app/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAdGRleAVOJTxleHRuA2FlbQIxMQBwZG9mAmZkaWQWURJxN1Oq7mX_cBaXe44chn4stk_AX3NydGMGYXBwX2lkDzEyNDAyNDU3NDI4NzQxNAABpzRCWBjirKcgsTJUaZ8q8MOB1ejYiiWeTMo5JQTuptCspTcVrZWrT4q3mx4g_aem_1GkxSsp2Df1uVGy7ZKpEow" target="_blank" class="project-card">
+            <a href="https://quiet-cannoli-07ba99.netlify.app/?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" class="project-card">
                 <div class="badge">أحدث عمل</div>
                 <div class="project-img">
                     <i class="fa-solid fa-video"></i>
@@ -557,7 +577,6 @@
                 </div>
             </a>
 
-            <!-- المشروع الثاني: تقييم قاعة الألعاب -->
             <a href="https://67e1.github.io/paradise/" target="_blank" class="project-card">
                 <div class="project-img">
                     <i class="fa-solid fa-gamepad"></i>
@@ -571,7 +590,6 @@
                 </div>
             </a>
 
-            <!-- المشروع الثالث: لعبة الويب -->
             <a href="https://67e1.github.io/game/" target="_blank" class="project-card">
                 <div class="project-img">
                     <i class="fa-solid fa-dice"></i>
@@ -619,12 +637,11 @@
         </div>
     </section>
 
-    <!-- قسم التقييمات (مرتب لجميع الأجهزة) -->
+    <!-- قسم التقييمات -->
     <section id="reviews">
         <h2 class="section-title">آراء وتقييمات الزوار</h2>
         <div class="reviews-wrapper">
             
-            <!-- نموذج إضافة تقييم -->
             <div class="review-form-box">
                 <h3 style="margin-bottom: 1rem; font-size: 1.2rem; text-align: center;">أضف تقييمك لموقعي</h3>
                 <form id="reviewForm" onsubmit="submitReview(event)">
@@ -655,7 +672,6 @@
                 </form>
             </div>
 
-            <!-- عرض التقييمات -->
             <div class="reviews-display-box">
                 <h3 style="margin-bottom: 1rem; font-size: 1.2rem; text-align: center;">التقييمات السابقة</h3>
                 <div id="reviewsList" class="reviews-list">
