@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معرض أعمال أمير | مطور ومصمم واجهات ويب</title>
+    <title>معرض أعمال أمير | Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg-dark: #0b0f19;
-            --bg-card: #131b2e;
-            --bg-card-hover: #19233c;
+            --bg-dark: #070b14;
+            --bg-card: rgba(19, 27, 46, 0.65);
+            --bg-card-hover: rgba(25, 35, 60, 0.9);
             --primary: #38bdf8;
-            --primary-hover: #0ea5e9;
+            --secondary: #818cf8;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --star-color: #fbbf24;
-            --border-color: #1e293b;
+            --border-color: rgba(56, 189, 248, 0.15);
+            --glow-color: rgba(56, 189, 248, 0.25);
         }
 
         * {
@@ -32,6 +32,32 @@
             background-color: var(--bg-dark);
             color: var(--text-main);
             line-height: 1.7;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* إضاءات خلفية جمالية */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            filter: blur(130px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        body::before {
+            top: -100px;
+            right: -100px;
+            background: rgba(56, 189, 248, 0.12);
+        }
+
+        body::after {
+            bottom: -100px;
+            left: -100px;
+            background: rgba(129, 140, 248, 0.12);
         }
 
         /* شريط التنقل */
@@ -39,9 +65,9 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(11, 15, 25, 0.85);
-            backdrop-filter: blur(12px);
-            padding: 1rem 7%;
+            background: rgba(7, 11, 20, 0.8);
+            backdrop-filter: blur(16px);
+            padding: 1.1rem 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -50,231 +76,131 @@
         }
 
         .logo {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 800;
-            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-decoration: none;
             letter-spacing: -0.5px;
         }
 
         nav {
             display: flex;
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         nav a {
             color: var(--text-main);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.3s;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         nav a:hover {
             color: var(--primary);
         }
 
-        /* القسم الرئيسي */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 100px 20px 40px;
-            background: radial-gradient(circle at center, #172038 0%, var(--bg-dark) 70%);
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
         }
 
-        .profile-img-container {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            padding: 4px;
-            background: linear-gradient(135deg, var(--primary), #6366f1);
-            margin-bottom: 1.5rem;
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            background-color: var(--bg-card);
-        }
-
-        .profile-img {
+        nav a:hover::after {
             width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--bg-dark);
-            background-color: var(--bg-card);
-        }
-
-        .profile-fallback {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: var(--bg-card);
-            border: 3px solid var(--bg-dark);
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.8rem;
-            font-weight: 800;
-        }
-
-        .hero h1 span {
-            color: var(--primary);
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 580px;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: #0b0f19;
-            padding: 0.75rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
-        }
-
-        .btn:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
         }
 
         /* تنسيق الأقسام */
         section {
-            padding: 5rem 7%;
+            padding: 7rem 8% 4rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
         }
 
         .section-title {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 3rem;
-            position: relative;
-            font-weight: 700;
+            font-size: 2.3rem;
+            font-weight: 800;
+            display: inline-block;
+            background: linear-gradient(135deg, #fff 30%, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 3px;
-            background: var(--primary);
+        .section-line {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             margin: 10px auto 0;
-            border-radius: 2px;
-        }
-
-        /* قسم من أنا */
-        .about-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--bg-card);
-            padding: 2.5rem;
-            border-radius: 14px;
-            border: 1px solid var(--border-color);
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .about-container p {
-            color: var(--text-main);
-            font-size: 1.05rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.9;
-        }
-
-        .skills-title {
-            color: var(--primary);
-            font-weight: 700;
-            margin-bottom: 1.2rem;
-            font-size: 1.05rem;
-        }
-
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.7rem;
-        }
-
-        .skill-tag {
-            background: var(--bg-dark);
-            color: var(--text-main);
-            padding: 0.45rem 1.1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid var(--border-color);
-            transition: 0.3s;
-        }
-
-        .skill-tag:hover {
-            border-color: var(--primary);
-            color: var(--primary);
+            border-radius: 4px;
         }
 
         /* قسم المشاريع */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.8rem;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 2.2rem;
         }
 
         .project-card {
             background: var(--bg-card);
-            border-radius: 14px;
+            backdrop-filter: blur(12px);
+            border-radius: 18px;
             overflow: hidden;
             border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
             text-decoration: none;
             color: inherit;
             position: relative;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
         }
 
         .project-card:hover {
-            transform: translateY(-6px);
-            background-color: var(--bg-card-hover);
+            transform: translateY(-10px);
+            background: var(--bg-card-hover);
             border-color: var(--primary);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px var(--glow-color);
         }
 
         .project-img {
             width: 100%;
-            height: 180px;
-            background-color: #1a2338;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(26, 35, 56, 0.9), rgba(15, 23, 42, 0.95));
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--primary);
-            font-size: 2.8rem;
+            font-size: 3.5rem;
             border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-img i {
+            transition: transform 0.4s ease, color 0.4s ease;
+        }
+
+        .project-card:hover .project-img i {
+            transform: scale(1.15) rotate(-5deg);
+            color: #fff;
         }
 
         .project-info {
-            padding: 1.5rem;
+            padding: 1.8rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -282,214 +208,158 @@
         }
 
         .project-info h3 {
-            margin-bottom: 0.5rem;
-            font-size: 1.25rem;
+            margin-bottom: 0.7rem;
+            font-size: 1.35rem;
             font-weight: 700;
+            color: var(--text-main);
         }
 
         .project-info p {
             color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 1.2rem;
-            line-height: 1.6;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .project-link-text {
             color: var(--primary);
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            transition: gap 0.3s ease;
+        }
+
+        .project-card:hover .project-link-text {
+            gap: 12px;
         }
 
         .badge {
             position: absolute;
-            top: 12px;
-            left: 12px;
-            background: var(--primary);
-            color: #0b0f19;
-            font-size: 0.75rem;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #070b14;
+            font-size: 0.8rem;
             font-weight: 800;
-            padding: 3px 10px;
+            padding: 4px 14px;
             border-radius: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
             z-index: 2;
         }
 
         /* قسم تواصل معي */
+        #contact {
+            padding-top: 3rem;
+            padding-bottom: 6rem;
+        }
+
         .contact-container {
-            max-width: 580px;
+            max-width: 620px;
             margin: 0 auto;
             background: var(--bg-card);
-            padding: 2.5rem;
-            border-radius: 14px;
+            backdrop-filter: blur(12px);
+            padding: 2.8rem;
+            border-radius: 20px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
         }
 
         .form-group {
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.4rem;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
             font-size: 0.95rem;
+            color: var(--text-main);
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            border: 1px solid #27354f;
-            background: var(--bg-dark);
+            padding: 0.85rem 1.1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(7, 11, 20, 0.7);
             color: var(--text-main);
             font-size: 0.95rem;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+            background: rgba(7, 11, 20, 0.95);
         }
 
         .whatsapp-btn {
             width: 100%;
-            background-color: #25D366;
+            background: linear-gradient(135deg, #25D366, #128C7E);
             color: #fff;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            font-size: 1rem;
-            margin-top: 0.5rem;
-            box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+            gap: 10px;
+            margin-top: 0.8rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.25);
         }
 
         .whatsapp-btn:hover {
-            background-color: #1ebe5d;
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-top: 2rem;
+            gap: 1.2rem;
+            margin-top: 2.2rem;
+            padding-top: 1.8rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .social-links a {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--text-muted);
-            font-size: 1.6rem;
-            transition: color 0.3s, transform 0.3s;
+            font-size: 1.3rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
         .social-links a:hover {
-            color: var(--primary);
-            transform: scale(1.1);
-        }
-
-        /* قسم التقييمات */
-        .reviews-wrapper {
-            max-width: 1050px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 2rem;
-            align-items: start;
-        }
-
-        .review-form-box {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 14px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .reviews-display-box {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 14px;
-            border: 1px solid var(--border-color);
-            max-height: 600px;
-            overflow-y: auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .star-rating {
-            display: flex;
-            flex-direction: row-reverse;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 1.2rem;
-        }
-
-        .star-rating input {
-            display: none;
-        }
-
-        .star-rating label {
-            font-size: 2rem;
-            color: #27354f;
-            cursor: pointer;
-            transition: color 0.2s, transform 0.2s;
-        }
-
-        .star-rating label:hover,
-        .star-rating label:hover ~ label,
-        .star-rating input:checked ~ label {
-            color: var(--star-color);
-            transform: scale(1.1);
-        }
-
-        .reviews-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .review-card {
-            background: var(--bg-dark);
-            padding: 1.2rem;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-        }
-
-        .review-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.4rem;
-        }
-
-        .reviewer-name {
-            font-weight: 700;
-            color: var(--primary);
-            font-size: 1rem;
-        }
-
-        .review-stars {
-            color: var(--star-color);
-            font-size: 0.85rem;
-        }
-
-        .review-date {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-bottom: 0.4rem;
-            display: block;
-        }
-
-        .review-text {
-            color: var(--text-main);
-            font-size: 0.95rem;
+            color: #fff;
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 15px var(--glow-color);
         }
 
         /* الفوتر */
@@ -498,18 +368,15 @@
             padding: 2rem;
             border-top: 1px solid var(--border-color);
             color: var(--text-muted);
-            font-size: 0.85rem;
-            background-color: var(--bg-dark);
+            font-size: 0.9rem;
+            background: rgba(7, 11, 20, 0.9);
         }
 
-        @media (max-width: 850px) {
+        @media (max-width: 768px) {
             header { padding: 1rem 5%; }
-            nav { display: none; }
-            .hero h1 { font-size: 2.1rem; }
-            section { padding: 4rem 5%; }
-            .reviews-wrapper {
-                grid-template-columns: 1fr;
-            }
+            section { padding: 6rem 5% 3rem; }
+            .section-title { font-size: 1.9rem; }
+            .contact-container { padding: 2rem 1.5rem; }
         }
     </style>
 </head>
@@ -519,48 +386,18 @@
     <header>
         <a href="#" class="logo">أمير | Portfolio</a>
         <nav>
-            <a href="#home">الرئيسية</a>
-            <a href="#about">من أنا</a>
-            <a href="#projects">أبرز أعمالي</a>
+            <a href="#projects">أعمالي</a>
             <a href="#contact">تواصل معي</a>
-            <a href="#reviews">التقييمات</a>
         </nav>
     </header>
 
-    <!-- الواجهة الرئيسية -->
-    <section id="home" class="hero">
-        <div class="profile-img-container">
-            <!-- ربط اسم الصورة المباشر مع بديل احتياطي في حال الخطأ -->
-            <img src="eebc6457-f3ed-4227-8f1d-7de09450d007.png" alt="صورتي الشخصية" class="profile-img" onerror="this.style.display='none'; document.getElementById('fallbackLetter').style.display='flex';">
-            <div id="fallbackLetter" class="profile-fallback" style="display:none;">أ</div>
-        </div>
-        <h1>مرحباً، أنا <span>أمير</span></h1>
-        <p>مطور ومصمم واجهات ويب متخصص في تحويل الأفكار إلى مواقع وتطبيقات رقمية احترافية، سريعة، ومتجاوبة تماماً مع جميع الأجهزة.</p>
-        <a href="#projects" class="btn">استعرض أعمالي</a>
-    </section>
-
-    <!-- قسم من أنا -->
-    <section id="about">
-        <h2 class="section-title">نبذة عني</h2>
-        <div class="about-container">
-            <p>
-                مطور مواقع شغوف بتقديم تجارب مستخدم مميزة. أمتلك خبرة عملية في تصميم وتطوير واجهات الويب باستخدام أحدث التقنيات وبكود نظيف ومرتب. أحرص دائماً على أن تكون المواقع التي أصممها سريعة، متجاوبة، وتلبي احتياجات العميل بدقة عالية.
-            </p>
-            <div class="skills-title">التقنيات وأدوات العمل:</div>
-            <div class="skills-list">
-                <span class="skill-tag"><i class="fa-brands fa-html5"></i> HTML5</span>
-                <span class="skill-tag"><i class="fa-brands fa-css3-alt"></i> CSS3</span>
-                <span class="skill-tag"><i class="fa-brands fa-js"></i> JavaScript</span>
-                <span class="skill-tag"><i class="fa-solid fa-mobile-screen"></i> Responsive Design</span>
-                <span class="skill-tag"><i class="fa-brands fa-git-alt"></i> Git & GitHub</span>
-                <span class="skill-tag"><i class="fa-solid fa-fire"></i> Firebase</span>
-            </div>
-        </div>
-    </section>
-
     <!-- قسم المشاريع -->
     <section id="projects">
-        <h2 class="section-title">مختارات من أبرز أعمالي</h2>
+        <div class="section-header">
+            <h2 class="section-title">أعمالي</h2>
+            <div class="section-line"></div>
+        </div>
+
         <div class="projects-grid">
             
             <a href="https://quiet-cannoli-07ba99.netlify.app/?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" class="project-card">
@@ -573,7 +410,9 @@
                         <h3>معرض أعمال مونتير</h3>
                         <p>موقع احترافي مخصص لعرض أعمال المونتير والفيديوهات الإبداعية بتصميم عصري وجذاب.</p>
                     </div>
-                    <span class="project-link-text">معاينة الموقع <i class="fa-solid fa-arrow-left"></i></span>
+                    <div class="project-footer">
+                        <span class="project-link-text">معاينة الموقع <i class="fa-solid fa-arrow-left"></i></span>
+                    </div>
                 </div>
             </a>
 
@@ -586,7 +425,9 @@
                         <h3>تقييم قاعة ألعاب Paradise</h3>
                         <p>منصة تفاعلية مخصصة لتقييم وعرض خدمات قاعة الألعاب بأسلوب سلس ومريح للمستخدم.</p>
                     </div>
-                    <span class="project-link-text">معاينة الموقع <i class="fa-solid fa-arrow-left"></i></span>
+                    <div class="project-footer">
+                        <span class="project-link-text">معاينة الموقع <i class="fa-solid fa-arrow-left"></i></span>
+                    </div>
                 </div>
             </a>
 
@@ -597,9 +438,11 @@
                 <div class="project-info">
                     <div>
                         <h3>لعبة ويب تفاعلية</h3>
-                        <p>تطوير تجربة لعب تفاعلية وممتعة تعمل مباشرة على المتصفح بتصميم مرن وسريع.</p>
+                        <p>تجربة لعب تفاعلية وممتعة تعمل مباشرة على المتصفح بتصميم مرن وسريع.</p>
                     </div>
-                    <span class="project-link-text">معاينة اللعبة <i class="fa-solid fa-arrow-left"></i></span>
+                    <div class="project-footer">
+                        <span class="project-link-text">معاينة اللعبة <i class="fa-solid fa-arrow-left"></i></span>
+                    </div>
                 </div>
             </a>
 
@@ -608,7 +451,11 @@
 
     <!-- قسم تواصل معي -->
     <section id="contact">
-        <h2 class="section-title">تواصل معي</h2>
+        <div class="section-header">
+            <h2 class="section-title">تواصل معي</h2>
+            <div class="section-line"></div>
+        </div>
+
         <div class="contact-container">
             <form id="whatsappForm" onsubmit="sendToWhatsApp(event)">
                 <div class="form-group">
@@ -623,8 +470,8 @@
                     <label>تفاصيل المشروع أو الاستفسار</label>
                     <textarea id="clientMessage" rows="4" placeholder="اكتب تفاصيل طلبك..." required></textarea>
                 </div>
-                <button type="submit" class="btn whatsapp-btn">
-                    <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> إرسال عبر واتساب
+                <button type="submit" class="whatsapp-btn">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> إرسال عبر واتساب
                 </button>
             </form>
 
@@ -637,53 +484,8 @@
         </div>
     </section>
 
-    <!-- قسم التقييمات -->
-    <section id="reviews">
-        <h2 class="section-title">آراء وتقييمات الزوار</h2>
-        <div class="reviews-wrapper">
-            
-            <div class="review-form-box">
-                <h3 style="margin-bottom: 1rem; font-size: 1.2rem; text-align: center;">أضف تقييمك لموقعي</h3>
-                <form id="reviewForm" onsubmit="submitReview(event)">
-                    <div class="star-rating">
-                        <input type="radio" id="star5" name="rating" value="5" checked />
-                        <label for="star5" title="5 نجوم"><i class="fa-solid fa-star"></i></label>
-                        <input type="radio" id="star4" name="rating" value="4" />
-                        <label for="star4" title="4 نجوم"><i class="fa-solid fa-star"></i></label>
-                        <input type="radio" id="star3" name="rating" value="3" />
-                        <label for="star3" title="3 نجوم"><i class="fa-solid fa-star"></i></label>
-                        <input type="radio" id="star2" name="rating" value="2" />
-                        <label for="star2" title="نجمتان"><i class="fa-solid fa-star"></i></label>
-                        <input type="radio" id="star1" name="rating" value="1" />
-                        <label for="star1" title="نجمة واحدة"><i class="fa-solid fa-star"></i></label>
-                    </div>
-
-                    <div class="form-group">
-                        <label>اسمك</label>
-                        <input type="text" id="reviewerName" placeholder="اكتب اسمك..." required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>رأيك بكل صراحة</label>
-                        <textarea id="reviewText" rows="3" placeholder="اكتب تعليقك..." required></textarea>
-                    </div>
-
-                    <button type="submit" class="btn" style="width: 100%;">نشر التقييم</button>
-                </form>
-            </div>
-
-            <div class="reviews-display-box">
-                <h3 style="margin-bottom: 1rem; font-size: 1.2rem; text-align: center;">التقييمات السابقة</h3>
-                <div id="reviewsList" class="reviews-list">
-                    <p style="text-align:center; color:var(--text-muted); font-size: 0.9rem;">جاري تحميل التقييمات...</p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
     <footer>
-        <p>جميع الحقوق محفوظة &copy; 2026 - تصميم وتطوير أمير</p>
+        <p>جميع الحقوق محفوظة &copy; 2026 - أمير</p>
     </footer>
 
     <!-- سكريبت الواتساب -->
@@ -696,106 +498,13 @@
             const contact = document.getElementById('clientContact').value;
             const message = document.getElementById('clientMessage').value;
 
-            const text = `مرحباً أمير، لدي استفسار من موقعك الشخصي:%0A%0A` +
+            const text = `مرحباً أمير، لدي استفسار من موقعك:%0A%0A` +
                          `*الاسم:* ${encodeURIComponent(name)}%0A` +
                          `*للتواصل:* ${encodeURIComponent(contact)}%0A` +
                          `*الرسالة:* ${encodeURIComponent(message)}`;
 
             window.open(`https://wa.me/${phoneNumber}?text=${text}`, '_blank');
         }
-    </script>
-
-    <!-- سكريبت Firebase للتقييمات -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyBHaudGEqPivj-GvO53c_lDDzBmQJmNKGg",
-            authDomain: "e1-b6219.firebaseapp.com",
-            projectId: "e1-b6219",
-            storageBucket: "e1-b6219.firebasestorage.app",
-            messagingSenderId: "652264324959",
-            appId: "1:652264324959:web:9be6990b66269ba1ab80ea"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const reviewsCollection = collection(db, "reviews");
-
-        function renderStars(count) {
-            let starsHtml = '';
-            for (let i = 1; i <= 5; i++) {
-                starsHtml += i <= count 
-                    ? '<i class="fa-solid fa-star"></i> ' 
-                    : '<i class="fa-regular fa-star" style="color: #27354f;"></i> ';
-            }
-            return starsHtml;
-        }
-
-        function escapeHtml(str) {
-            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-        }
-
-        const q = query(reviewsCollection, orderBy("timestamp", "desc"));
-        onSnapshot(q, (snapshot) => {
-            const list = document.getElementById('reviewsList');
-            list.innerHTML = '';
-
-            if (snapshot.empty) {
-                list.innerHTML = '<p style="text-align:center; color:var(--text-muted); font-size: 0.9rem;">لا توجد تقييمات بعد، كن أول من يقيّم!</p>';
-                return;
-            }
-
-            snapshot.forEach((doc) => {
-                const review = doc.data();
-                const card = document.createElement('div');
-                card.className = 'review-card';
-                card.innerHTML = `
-                    <div class="review-header">
-                        <span class="reviewer-name"><i class="fa-solid fa-user-circle"></i> ${escapeHtml(review.name)}</span>
-                        <div class="review-stars">${renderStars(review.rating)}</div>
-                    </div>
-                    <span class="review-date">${review.date}</span>
-                    <p class="review-text">${escapeHtml(review.text)}</p>
-                `;
-                list.appendChild(card);
-            });
-        }, (error) => {
-            console.error("خطأ في جلب التعليقات:", error);
-            document.getElementById('reviewsList').innerHTML = 
-                '<p style="text-align:center; color:#ef4444; font-size:0.9rem;">تعذر جلب التقييمات، تحقق من إعدادات قاعدة البيانات.</p>';
-        });
-
-        window.submitReview = async function(event) {
-            event.preventDefault();
-
-            const submitBtn = event.target.querySelector('button[type="submit"]');
-            submitBtn.innerText = "جاري النشر...";
-            submitBtn.disabled = true;
-
-            const name = document.getElementById('reviewerName').value;
-            const text = document.getElementById('reviewText').value;
-            const rating = parseInt(document.querySelector('input[name="rating"]:checked').value);
-            const today = new Date().toLocaleDateString('ar-IQ');
-
-            try {
-                await addDoc(reviewsCollection, {
-                    name: name,
-                    rating: rating,
-                    text: text,
-                    date: today,
-                    timestamp: Date.now()
-                });
-                document.getElementById('reviewForm').reset();
-            } catch (error) {
-                alert("تعذر نشر التعليق! تأكد من صلاحيات الكتابة في قاعدة البيانات.");
-                console.error(error);
-            }
-
-            submitBtn.innerText = "نشر التقييم";
-            submitBtn.disabled = false;
-        };
     </script>
 
 </body>
